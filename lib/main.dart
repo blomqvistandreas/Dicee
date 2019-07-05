@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   return runApp(
@@ -32,25 +33,29 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: FlatButton(
               // Dollar sign $ = alt + 4
-              onPressed: () {
-                setState(() {
-                  leftDiceNum = 3;
-                });
-                print('Left button pressed...');
-              },
               child: Image.asset('images/dice$leftDiceNum.png'),
+              onPressed: () {
+                roll();
+              },
             ),
           ),
           Expanded(
             child: FlatButton(
               child: Image.asset('images/dice$rightDiceNum.png'),
               onPressed: () {
-                print('Right button pressed...');
+                roll();
               },
             ),
           )
         ],
       ),
     );
+  }
+
+  void roll() {
+    setState(() {
+      leftDiceNum = Random().nextInt(6) + 1;
+      rightDiceNum = Random().nextInt(6) + 1;
+    });
   }
 }
